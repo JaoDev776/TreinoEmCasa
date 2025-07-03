@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garrafa Fitness - Rotina de Treino</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Custom animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse { animation: pulse 2s infinite; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <!-- App Container -->
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-lg flex flex-col">
+        <!-- Header -->
+        <header class="bg-indigo-600 text-white p-4 sticky top-0 z-10">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center mr-3">
+                        <i class="fas fa-dumbbell text-xl"></i>
+                    </div>
+                    <h1 class="text-xl font-bold">Garrafa Fitness</h1>
+                </div>
+                <div class="flex space-x-2">
+                    <button id="addImageBtn" class="p-2 rounded-full hover:bg-indigo-500 transition" title="Adicionar imagens">
+                        <i class="fas fa-image"></i>
+                    </button>
+                    <button id="resetBtn" class="p-2 rounded-full hover:bg-indigo-500 transition">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow p-4 pb-24 overflow-y-auto">
+            <!-- Workout Days -->
+            <section id="daysSection">
+                <!-- Day 1 -->
+                <div class="mb-6 day-card" data-day="1">
+                    <div class="flex justify-between items-center bg-gradient-to-r from-blue-500 to-blue-400 text-white rounded-t-lg p-3">
+                        <h2 class="text-lg font-bold">Dia 1: Costas + Bíceps + Abdômen</h2>
+                        <button class="complete-btn p-2 rounded-full hover:bg-blue-400 transition" title="Marcar como concluído">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-b-lg shadow-md overflow-hidden">
+                        <ul class="divide-y divide-gray-200">
+                            <li class="p-3 hover:bg-gray-50">
+                                <div class="flex items-start mb-2">
+                                    <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                    <span>Remada unilateral com garrafa (apoie uma mão no joelho) – 4x10 cada braço</span>
+                                </div>
+                                <div class="exercise-image ml-6 mt-2 rounded-lg overflow-hidden">
+                                    <!-- Imagem será adicionada aqui -->
+                                </div>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Rosca direta alternada – 3x12 cada braço</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Rosca martelo – 3x12</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Prancha com elevação de garrafa (toque a garrafa no ombro) – 3x10 cada lado</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Abdominal supra segurando garrafa no peito – 3x15</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="mb-6 day-card" data-day="2">
+                    <div class="flex justify-between items-center bg-gradient-to-r from-red-500 to-red-400 text-white rounded-t-lg p-3">
+                        <h2 class="text-lg font-bold">Dia 2: Peito + Tríceps + Abdômen</h2>
+                        <button class="complete-btn p-2 rounded-full hover:bg-red-400 transition" title="Marcar como concluído">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-b-lg shadow-md overflow-hidden">
+                        <ul class="divide-y divide-gray-200">
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Flexão tradicional – 4x máx</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Flexão diamante – 3x máx</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Tríceps francês unilateral (deitado, garrafa em uma mão) – 3x10 cada braço</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Prancha com rotação + garrafa (passe a garrafa de uma mão para outra) – 3x8 cada lado</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Abdominal bicicleta com garrafa no peito – 3x20</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="mb-6 day-card" data-day="3">
+                    <div class="flex justify-between items-center bg-gradient-to-r from-green-500 to-green-400 text-white rounded-t-lg p-3">
+                        <h2 class="text-lg font-bold">Dia 3: Pernas + Ombro + Abdômen</h2>
+                        <button class="complete-btn p-2 rounded-full hover:bg-green-400 transition" title="Marcar como concluído">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-b-lg shadow-md overflow-hidden">
+                        <ul class="divide-y divide-gray-200">
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Agachamento com garrafas nos ombros – 4x12</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Afundo segurando garrafas – 3x10 cada perna</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Elevação lateral alternada – 3x12 cada braço</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Prancha lateral segurando garrafa (levante a garrafa para cima) – 3x10 cada lado</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Abdominal infra segurando garrafa entre os pés – 3x12</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 4 -->
+                <div class="mb-6 day-card" data-day="4">
+                    <div class="flex justify-between items-center bg-gradient-to-r from-purple-500 to-purple-400 text-white rounded-t-lg p-3">
+                        <h2 class="text-lg font-bold">Dia 4: Full Body (Resistência)</h2>
+                        <button class="complete-btn p-2 rounded-full hover:bg-purple-400 transition" title="Marcar como concluído">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-b-lg shadow-md overflow-hidden">
+                        <ul class="divide-y divide-gray-200">
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Burpee + rosca bíceps (pegue as garrafas no salto) – 3x10</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Agachamento + desenvolvimento de ombro (garrafas acima da cabeça) – 3x12</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Tríceps coice unilateral (inclinado para frente) – 3x10 cada braço</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Prancha com remada unilateral (segure uma garrafa e puxe para o lado) – 3x8 cada lado</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Corrida estacionária segurando garrafas – 3x 45s</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="mb-6 day-card" data-day="5">
+                    <div class="flex justify-between items-center bg-gradient-to-r from-yellow-500 to-yellow-400 text-white rounded-t-lg p-3">
+                        <h2 class="text-lg font-bold">Dia 5: Ombro + Antebraço + Abdômen</h2>
+                        <button class="complete-btn p-2 rounded-full hover:bg-yellow-400 transition" title="Marcar como concluído">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="bg-white rounded-b-lg shadow-md overflow-hidden">
+                        <ul class="divide-y divide-gray-200">
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Desenvolvimento com garrafas – 4x10</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Elevação frontal – 3x12</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Rosca inversa (antebraço) – 3x12</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Flexão de punho (sentado) – 3x15</span>
+                            </li>
+                            <li class="p-3 flex items-start hover:bg-gray-50">
+                                <span class="text-indigo-600 mr-2"><i class="fas fa-check-circle"></i></span>
+                                <span>Abdominal canivete – 3x</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="mt-8 bg-white rounded-lg shadow-md p-4">
+                <h2 class="text-lg font-bold text-gray-800 mb-3">Seu Progresso</h2>
+                <div class="flex items-center mb-2">
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div id="progressBar" class="bg-indigo-600 h-4 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <span id="progressText" class="ml-2 text-sm font-medium text-gray-600">0%</span>
+                </div>
+                <p id="completedDaysText" class="text-gray-600 text-sm">Nenhum dia concluído ainda</p>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bg-white border-t border-gray-200 fixed bottom-0 w-full max-w-md">
+            <div class="flex justify-around">
+                <a href="#" class="p-4 text-indigo-600">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+                <a href="#" class="p-4 text-gray-500">
+                    <i class="fas fa-calendar-alt text-xl"></i>
+                </a>
+                <a href="#" class="p-4 text-gray-500">
+                    <i class="fas fa-chart-line text-xl"></i>
+                </a>
+                <a href="#" class="p-4 text-gray-500">
+                    <i class="fas fa-cog text-xl"></i>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="completeModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-20">
+        <div class="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
+            <h3 class="text-xl font-bold mb-2">Dia Concluído!</h3>
+            <p class="mb-6">Você concluiu todos os exercícios do dia?</p>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelComplete" class="px-4 py-2 rounded border border-gray-300 text-gray-700">Cancelar</button>
+                <button id="confirmComplete" class="px-4 py-2 rounded bg-indigo-600 text-white">Sim, concluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-20">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold mb-4">Adicionar Imagem ao Exercício</h3>
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">URL da Imagem/GIF:</label>
+                <input type="text" id="imageUrl" class="w-full p-2 border rounded" placeholder="https://exemplo.com/imagem.gif">
+            </div>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelImage" class="px-4 py-2 rounded border border-gray-300 text-gray-700">Cancelar</button>
+                <button id="confirmImage" class="px-4 py-2 rounded bg-indigo-600 text-white">Adicionar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div id="celebrationModal" class="fixed inset-0 flex items-center justify-center hidden z-30">
+        <div class="bg-white rounded-lg p-6 max-w-sm w-full mx-4 shadow-xl">
+            <div class="text-center">
+                <div class="text-green-500 mb-4 animate-pulse">
+                    <i class="fas fa-check-circle text-6xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Parabéns!</h3>
+                <p id="celebrationText" class="mb-4">Você concluiu o Dia 1!</p>
+                <button id="closeCelebration" class="px-4 py-2 rounded bg-green-500 text-white">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load completed days from localStorage
+            let completedDays = JSON.parse(localStorage.getItem('completedDays')) || [];
+            updateProgress(completedDays);
+
+            // Setup complete buttons
+            document.querySelectorAll('.complete-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const dayCard = this.closest('.day-card');
+                    const day = dayCard.getAttribute('data-day');
+                    
+                    if (completedDays.includes(day)) {
+                        // Day is already completed - uncomplete it
+                        completedDays = completedDays.filter(d => d !== day);
+                        localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                        updateDisplay(completedDays);
+                        updateProgress(completedDays);
+                    } else {
+                        // Show confirmation modal
+                        document.getElementById('completeModal').classList.remove('hidden');
+                        
+                        // Store the day we're currently trying to complete
+                        document.getElementById('confirmComplete').dataset.day = day;
+                    }
+                });
+            });
+
+            // Modal buttons
+            document.getElementById('cancelComplete').addEventListener('click', function() {
+                document.getElementById('completeModal').classList.add('hidden');
+            });
+
+            document.getElementById('confirmComplete').addEventListener('click', function() {
+                const day = this.dataset.day;
+                
+                if (!completedDays.includes(day)) {
+                    completedDays.push(day);
+                    localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                    
+                    document.getElementById('celebrationText').textContent = `Você concluiu o Dia ${day}!`;
+                    document.getElementById('completeModal').classList.add('hidden');
+                    updateDisplay(completedDays);
+                    updateProgress(completedDays);
+                    
+                    // Show celebration modal
+                    setTimeout(() => {
+                        document.getElementById('celebrationModal').classList.remove('hidden');
+                    }, 300);
+                }
+            });
+
+            document.getElementById('closeCelebration').addEventListener('click', function() {
+                document.getElementById('celebrationModal').classList.add('hidden');
+            });
+
+            // Image functionality
+            let currentExercise = null;
+            
+            document.getElementById('addImageBtn').addEventListener('click', function() {
+                alert('Clique no exercício onde deseja adicionar a imagem');
+            });
+
+            document.querySelectorAll('li').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (e.target.closest('.exercise-image') || e.target.closest('.fa-check-circle')) return;
+                    
+                    currentExercise = this;
+                    document.getElementById('imageModal').classList.remove('hidden');
+                });
+            });
+
+            document.getElementById('cancelImage').addEventListener('click', function() {
+                document.getElementById('imageModal').classList.add('hidden');
+                currentExercise = null;
+            });
+
+            document.getElementById('confirmImage').addEventListener('click', function() {
+                const imageUrl = document.getElementById('imageUrl').value.trim();
+                if (imageUrl && currentExercise) {
+                    const imageContainer = currentExercise.querySelector('.exercise-image');
+                    if (imageContainer) {
+                        imageContainer.innerHTML = `<img src="${imageUrl}" alt="Demonstração do exercício" class="w-full h-auto rounded-lg shadow">`;
+                        // Salvar no localStorage
+                        const day = currentExercise.closest('.day-card').getAttribute('data-day');
+                        const exerciseIndex = Array.from(currentExercise.parentElement.children).indexOf(currentExercise);
+                        const imageKey = `day${day}_ex${exerciseIndex}`;
+                        localStorage.setItem(imageKey, imageUrl);
+                    }
+                }
+                document.getElementById('imageModal').classList.add('hidden');
+                document.getElementById('imageUrl').value = '';
+                currentExercise = null;
+            });
+
+            // Carregar imagens salvas
+            function loadSavedImages() {
+                document.querySelectorAll('.day-card').forEach(dayCard => {
+                    const day = dayCard.getAttribute('data-day');
+                    dayCard.querySelectorAll('li').forEach((exercise, index) => {
+                        const imageKey = `day${day}_ex${index}`;
+                        const savedImage = localStorage.getItem(imageKey);
+                        if (savedImage) {
+                            const imageContainer = exercise.querySelector('.exercise-image');
+                            if (imageContainer) {
+                                imageContainer.innerHTML = `<img src="${savedImage}" alt="Demonstração do exercício" class="w-full h-auto rounded-lg shadow">`;
+                            }
+                        }
+                    });
+                });
+            }
+
+            loadSavedImages();
+
+            // Reset button
+            document.getElementById('resetBtn').addEventListener('click', function() {
+                if (confirm('Deseja resetar todo o progresso?')) {
+                    completedDays = [];
+                    // Limpar todas as imagens também
+                    const keysToRemove = [];
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key.startsWith('day') && key.includes('_ex')) {
+                            keysToRemove.push(key);
+                        }
+                    }
+                    keysToRemove.forEach(key => localStorage.removeItem(key));
+                    
+                    localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                    updateDisplay(completedDays);
+                    updateProgress(completedDays);
+                    loadSavedImages();
+                }
+            });
+
+            // Function to update UI for completed days
+            function updateDisplay(days) {
+                document.querySelectorAll('.day-card').forEach(card => {
+                    const day = card.getAttribute('data-day');
+                    const btn = card.querySelector('.complete-btn');
+                    
+                    if (days.includes(day)) {
+                        card.classList.add('opacity-70');
+                        btn.innerHTML = '<i class="fas fa-check-double"></i>';
+                        btn.classList.add('bg-green-500');
+                    } else {
+                        card.classList.remove('opacity-70');
+                        btn.innerHTML = '<i class="fas fa-check"></i>';
+                        btn.classList.remove('bg-green-500');
+                    }
+                });
+            }
+
+            // Function to update progress
+            function updateProgress(days) {
+                const totalDays = document.querySelectorAll('.day-card').length;
+                const completedCount = days.length;
+                const percentage = Math.round((completedCount / totalDays) * 100);
+                
+                document.getElementById('progressBar').style.width = `${percentage}%`;
+                document.getElementById('progressText').textContent = `${percentage}%`;
+                
+                const daysText = completedCount === 0 
+                    ? 'Nenhum dia concluído ainda' 
+                    : `${completedCount} dia${completedCount > 1 ? 's' : ''} concluído${completedCount > 1 ? 's' : ''}`;
+                document.getElementById('completedDaysText').textContent = daysText;
+            }
+        });
+    </script>
+</body>
+</html>
